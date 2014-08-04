@@ -3,12 +3,15 @@ package com.thirdi.sensorsupervisor;
 import java.util.List;
 
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +45,7 @@ public class SensorFragment extends Fragment {
 	private LayoutInflater mInflater;
 	private SensorManager mSensorManager;
 	private LinearLayout mSensorContainer;
+	private DBHelper mDBHelper;
 	
 	/**
 	 * A holder class that holds view elements, sensor and listener.
@@ -84,7 +88,7 @@ public class SensorFragment extends Fragment {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		mSensorManager = (SensorManager) getActivity()
 				.getSystemService(Context.SENSOR_SERVICE);
-		
+		mDBHelper = new DBHelper(getActivity().getBaseContext());
 	}
 	
 	@Override
@@ -104,6 +108,9 @@ public class SensorFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+
+		//Get database in write mode
+		final SQLiteDatabase database = mDBHelper.getWritableDatabase();
 		
 		//Retrieve the list of available sensors
 		List<Sensor> sensorsList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
@@ -165,7 +172,19 @@ public class SensorFragment extends Fragment {
 								}
 								//Save data according to the value of SAVE_LOCATION.
 								if (SAVE_LOCATION == "Database") {
-									//TODO: ADD DATABASE SAVE OPTION
+									//TODO: Make it work in a seperate thread.
+									//Create a new map of values where column names are keys
+									ContentValues values = new ContentValues();
+									values.put(DBContract.DBEntry.COLUMN_NAME_SENSOR_ID, holder.sensor.getType());
+									values.put(DBContract.DBEntry.COLUMN_NAME_SENSOR_NAME, holder.sensor.getName());
+									values.put(DBContract.DBEntry.COLUMN_NAME_VALUE_X, sensorEvent.values[0]);
+									values.put(DBContract.DBEntry.COLUMN_NAME_VALUE_Y, sensorEvent.values[1]);
+									values.put(DBContract.DBEntry.COLUMN_NAME_VALUE_Z, sensorEvent.values[2]);
+
+									//Insert the new row, returning the primary key value of the new row
+									long newRowId;
+									newRowId = database.insert(DBContract.DBEntry.TABLE_NAME, null, values);
+									Log.d(getTag(), String.valueOf(newRowId));
 								} else if (SAVE_LOCATION == "File") {
 									//TODO: ADD FILE SAVE OPTION.
 								}
