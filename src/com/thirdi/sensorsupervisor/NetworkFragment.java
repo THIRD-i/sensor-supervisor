@@ -20,20 +20,9 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class NetworkFragment extends Fragment {
-    /**
-     * Shows a list of available wifi routers and their details as of now.
-     * TODO: Add ability to connect to them, download data from network, check connection speed.
-     * TODO: Add ability to use GPRS/3G for the same job.
-     *
-     * mWifiManager : WifiManager to control and learn about our wifi.
-     * mScanButton : Button to initiate a network scan.
-     * mWifiToggleButton : ToggleButton to start/stop wifi connectivity of your phone.
-     */
-
 	private WifiManager mWifiManager;
     private Button mScanButton;
     private ToggleButton mWifiToggleButton;
-
     public NetworkFragment() {
         // Required empty public constructor
     }
@@ -54,12 +43,12 @@ public class NetworkFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //Initialize member variables.
+
         mScanButton = (Button) getView().findViewById(R.id.scanButton);
         mWifiToggleButton = (ToggleButton) getView().findViewById(R.id.wifiToggleButton);
         mWifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
 
-        //Set button states(If wifi isn't enabled, stop user from initiating a network scan.)
+        //Set button states
         if (mWifiManager.isWifiEnabled()) {
             mScanButton.setEnabled(true);
             mWifiToggleButton.setChecked(true);
@@ -72,8 +61,6 @@ public class NetworkFragment extends Fragment {
         mScanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //This method is invoked whenever you click the button.
-                
                 if (!scanWifi()) {
                     //Couldn't scan. Show error.
                     Toast.makeText(getActivity().getBaseContext(), "Oh snap! Can't scan for wifi.",
@@ -86,8 +73,6 @@ public class NetworkFragment extends Fragment {
         mWifiToggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean check) {
-                //This method is invoked whenever togglebutton's state changes(i.e. you touch it.)
-
                 if (check) {
                     if (!toggleWifi()) {
                         //Couldn't toggle, reset the button and show error text.

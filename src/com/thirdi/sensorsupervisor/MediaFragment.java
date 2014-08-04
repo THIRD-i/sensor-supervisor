@@ -35,7 +35,6 @@ public class MediaFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Initialize member variables.
         mAudioFragment = new AudioFragment();
         mCameraFragment = new CameraFragment();
     }
@@ -43,7 +42,6 @@ public class MediaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Inflate view.
         return inflater.inflate(R.layout.fragment_media, container, false);
     }
 
@@ -51,29 +49,21 @@ public class MediaFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        //Initialize member variables.
         mFragmentManager=getFragmentManager();
+
         mCameraButton =(Button)getView().findViewById(R.id.button2);
         mAudioButton =(Button)getView().findViewById(R.id.button);
-        //Set a click listener to camera button to bring camera fragment when needed.
         mCameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //This method is invoked whenever you click the button.
-                
-                //Change current fragment with the camera fragment.
             	mFragmentTransaction = mFragmentManager.beginTransaction();
             	mFragmentTransaction.replace(R.id.container, mCameraFragment);
             	mFragmentTransaction.commit();
             }
         });
-        //Set a click listener to audio button to bring microphone fragment when needed.
         mAudioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //This method is invoked whenever you click the button.
-                
-                //Change current fragment with the audio fragment.
                 mFragmentTransaction = mFragmentManager.beginTransaction();
                 mFragmentTransaction.replace(R.id.container,mAudioFragment);
                 mFragmentTransaction.commit();
