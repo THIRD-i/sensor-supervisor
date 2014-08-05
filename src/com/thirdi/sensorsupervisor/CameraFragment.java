@@ -22,7 +22,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-
+//TODO: Clean, comment, add a way to control FPS and create videos.
 public class CameraFragment extends Fragment {
 	private Camera mCamera;
     private CameraPreview mCameraPreview;

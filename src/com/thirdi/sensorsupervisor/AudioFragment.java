@@ -16,24 +16,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Spinner;
 //TODO: Needs cleanup, a way to control rates etc.
 public class AudioFragment extends Fragment {
 	
-	protected static int RECORDER_SAMPLERATE = 8000 ;
+	private static final int RECORDER_SAMPLERATE = 8000;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
-    private AudioRecord recorder = null;
-    private Thread recordingThread = null;
-    private boolean isRecording = false;
-    
+    private AudioRecord mRecorder = null;
+    private Thread mRecordingThread = null;
+    private boolean mİsRecording = false;
     public AudioFragment() {
         // Required empty public constructor
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
 
     }
     @Override
@@ -47,7 +44,6 @@ public class AudioFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        
         setButtonHandlers();
         enableButtons(false);
         int bufferSize = AudioRecord.getMinBufferSize(RECORDER_SAMPLERATE,RECORDER_CHANNELS, RECORDER_AUDIO_ENCODING);
@@ -73,15 +69,15 @@ public class AudioFragment extends Fragment {
 
     private void startRecording() {
 
-        recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE, RECORDER_CHANNELS,
+        mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC,RECORDER_SAMPLERATE, RECORDER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, BufferElements2Rec * BytesPerElement);
-        recorder.startRecording();
-        isRecording = true;
-        recordingThread = new Thread(new Runnable() {
+        mRecorder.startRecording();
+        mİsRecording = true;
+        mRecordingThread = new Thread(new Runnable() {
             public void run() {writeAudioDataToFile();
             }
         }, "AudioRecorder Thread");
-        recordingThread.start();
+        mRecordingThread.start();
     }
 
     //convert short to byte
@@ -99,8 +95,8 @@ public class AudioFragment extends Fragment {
 
     private void writeAudioDataToFile() {
         // Write the output audio in name
-    	//String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-    	String filePath = Environment.getExternalStorageDirectory().getPath()+ "/record.3gp";
+    	String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filePath = Environment.getExternalStorageDirectory().getPath()+ timeStamp+".3gp";
         short sData[] = new short[BufferElements2Rec];
         FileOutputStream os = null;
         try {
@@ -109,10 +105,10 @@ public class AudioFragment extends Fragment {
             e.printStackTrace();
         }
 
-        while (isRecording) {
+        while (mİsRecording) {
             // gets the voice output from microphone to byte format
 
-            recorder.read(sData, 0, BufferElements2Rec);
+            mRecorder.read(sData, 0, BufferElements2Rec);
             System.out.println("Short wirting to file" + sData.toString());
             try {
                 // // writes the data to file from buffer
@@ -132,12 +128,12 @@ public class AudioFragment extends Fragment {
 
     private void stopRecording() {
         // stops the recording activity
-        if (null != recorder) {
-            isRecording = false;
-            recorder.stop();
-            recorder.release();
-            recorder = null;
-            recordingThread = null;
+        if (null != mRecorder) {
+            mİsRecording = false;
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+            mRecordingThread = null;
         }
     }
     //start and stop button listener
