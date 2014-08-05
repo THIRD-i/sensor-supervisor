@@ -172,7 +172,7 @@ public class SensorFragment extends Fragment {
 								}
 								//Save data according to the value of SAVE_LOCATION.
 								if (SAVE_LOCATION == "Database") {
-									//TODO: Make it work in a seperate thread.
+									new Thread(new Runnable() {
 									//Create a new map of values where column names are keys
 									ContentValues values = new ContentValues();
 									values.put(DBContract.DBEntry.COLUMN_NAME_SENSOR_ID, holder.sensor.getType());
@@ -180,11 +180,11 @@ public class SensorFragment extends Fragment {
 									values.put(DBContract.DBEntry.COLUMN_NAME_VALUE_X, sensorEvent.values[0]);
 									values.put(DBContract.DBEntry.COLUMN_NAME_VALUE_Y, sensorEvent.values[1]);
 									values.put(DBContract.DBEntry.COLUMN_NAME_VALUE_Z, sensorEvent.values[2]);
-
 									//Insert the new row, returning the primary key value of the new row
 									long newRowId;
 									newRowId = database.insert(DBContract.DBEntry.TABLE_NAME, null, values);
 									Log.d(getTag(), String.valueOf(newRowId));
+									}).start();
 								} else if (SAVE_LOCATION == "File") {
 									//TODO: ADD FILE SAVE OPTION.
 								}
