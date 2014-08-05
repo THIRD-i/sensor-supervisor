@@ -9,7 +9,8 @@ package com.thirdi.sensorsupervisor;
 
 public final class R {
     public static final class array {
-        public static final int data_array=0x7f060000;
+        public static final int audio_array=0x7f060000;
+        public static final int data_array=0x7f060001;
     }
     public static final class attr {
     }
@@ -37,51 +38,52 @@ public final class R {
     }
     public static final class id {
         public static final int accuracy=0x7f09000d;
-        public static final int action_example=0x7f09002f;
-        public static final int action_settings=0x7f09002e;
-        public static final int bssidView=0x7f090029;
+        public static final int action_example=0x7f090030;
+        public static final int action_settings=0x7f09002f;
+        public static final int audio_spinner=0x7f09001a;
+        public static final int bssidView=0x7f09002a;
         public static final int btnStart=0x7f090003;
         public static final int btnStop=0x7f090004;
         public static final int button=0x7f090010;
         public static final int button2=0x7f090013;
-        public static final int camera_switch=0x7f09001b;
-        public static final int capabilitiesView=0x7f09002a;
+        public static final int camera_switch=0x7f09001c;
+        public static final int capabilitiesView=0x7f09002b;
         public static final int container=0x7f090001;
         public static final int data_spinner=0x7f090019;
-        public static final int data_switch=0x7f09001a;
+        public static final int data_switch=0x7f09001b;
         public static final int drawer_layout=0x7f090000;
-        public static final int frequencyView=0x7f09002b;
+        public static final int frequencyView=0x7f09002c;
         public static final int labelAccuracy=0x7f09000a;
         public static final int labelLatitude=0x7f090009;
         public static final int labelLongitude=0x7f090008;
         public static final int latitude=0x7f09000b;
-        public static final int levelView=0x7f09002c;
+        public static final int levelView=0x7f09002d;
         public static final int list=0x7f090014;
         public static final int locationButton=0x7f09000e;
         public static final int longitude=0x7f09000c;
         public static final int navigation_drawer=0x7f090002;
         public static final int picture_button=0x7f090005;
-        public static final int progressbar_x=0x7f090022;
-        public static final int progressbar_y=0x7f090024;
-        public static final int progressbar_z=0x7f090026;
-        public static final int rate_text=0x7f090020;
+        public static final int progressbar_x=0x7f090023;
+        public static final int progressbar_y=0x7f090025;
+        public static final int progressbar_z=0x7f090027;
+        public static final int rate_text=0x7f090021;
         public static final int scanButton=0x7f090015;
         public static final int scroll_view_sensor=0x7f090017;
         public static final int section_label=0x7f09000f;
-        public static final int seekbar_sensor=0x7f09001e;
+        public static final int seekbar_sensor=0x7f09001f;
         public static final int sensor_container=0x7f090018;
-        public static final int ssidView=0x7f090028;
+        public static final int ssidView=0x7f090029;
         public static final int surface=0x7f090007;
-        public static final int switch_sensor=0x7f09001d;
-        public static final int tempid=0x7f09001c;
+        public static final int switch_sensor=0x7f09001e;
+        public static final int tempid=0x7f09001d;
         public static final int textView=0x7f090011;
         public static final int textView2=0x7f090012;
-        public static final int textview_accuracy=0x7f090027;
-        public static final int textview_rate=0x7f09001f;
-        public static final int textview_x=0x7f090021;
-        public static final int textview_y=0x7f090023;
-        public static final int textview_z=0x7f090025;
-        public static final int timestampView=0x7f09002d;
+        public static final int textview_accuracy=0x7f090028;
+        public static final int textview_rate=0x7f090020;
+        public static final int textview_x=0x7f090022;
+        public static final int textview_y=0x7f090024;
+        public static final int textview_z=0x7f090026;
+        public static final int timestampView=0x7f09002e;
         public static final int video_button=0x7f090006;
         public static final int wifiToggleButton=0x7f090016;
     }
@@ -107,6 +109,7 @@ public final class R {
         public static final int action_example=0x7f050007;
         public static final int action_settings=0x7f050008;
         public static final int app_name=0x7f050000;
+        public static final int audio_samplerate_text=0x7f05000e;
         public static final int camera_switch_text=0x7f05000d;
         public static final int data_spinner_text=0x7f050009;
         public static final int data_switch_text=0x7f05000a;
