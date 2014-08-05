@@ -17,10 +17,12 @@ public class SettingsFragment extends Fragment {
 	 * Shows settings of your app like showing camera, where to save data etc.
 	 *
 	 * mDataSpinner : Used to control where to save sensor data.
+	 * mAudioSpinner : Used to control audio recorder's sample rate.
 	 * mDataSwitch : Used to control whether we update UI or not when we receive sensor data.
 	 * mCameraSwitch : Used to control whether we show camera data or not.
 	 */
 	private Spinner mDataSpinner;
+	private Spinner mAudioSpinner;
 	private Switch mDataSwitch;
 	private Switch mCameraSwitch;
 	
@@ -43,16 +45,22 @@ public class SettingsFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_setting, container, false);
 		//Initialize member variables.(Which are view elements.)
 		mDataSpinner = (Spinner) view.findViewById(R.id.data_spinner);
+		mAudioSpinner=(Spinner)view.findViewById(R.id.audio_spinner);
 		mDataSwitch = (Switch) view.findViewById(R.id.data_switch);
 		mCameraSwitch = (Switch) view.findViewById(R.id.camera_switch);
 		//Set the default state of switches based on the previous choices.
 		mCameraSwitch.setChecked(CameraPreview.SHOW_CAMERA);
 		mDataSwitch.setChecked(SensorFragment.SHOW_DATA);
 		//Create an array adapter, take available save location options with it and adapt it to the spinner.
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),
+		ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(view.getContext(),
 				R.array.data_array, android.R.layout.simple_spinner_dropdown_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		mDataSpinner.setAdapter(adapter);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		mDataSpinner.setAdapter(dataAdapter);
+		//Create an array adapter for available audio sample rates.
+		ArrayAdapter<CharSequence> audioAdapter = ArrayAdapter.createFromResource(view.getContext(),
+				R.array.audio_array, android.R.layout.simple_spinner_dropdown_item);
+		audioAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    mAudioSpinner.setAdapter(audioAdapter);
 		//Set an item selection listener for data spinner.
 		mDataSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -77,6 +85,36 @@ public class SettingsFragment extends Fragment {
 				//This method is being invoked when we select nothing from the spinner.
 			}
 		});
+		//Set an item selection listener for audio spinner.
+				mAudioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> parent, View view,
+							int position, long id) {
+						//This method is being invoked whenever we select an item from the spinner.
+						
+						//Depending on the item, set audio recording sample rate accordingly.
+						switch (position) {
+							case 1:
+								AudioFragment.RECORDER_SAMPLERATE=8000;
+								break;
+							case 2:
+								AudioFragment.RECORDER_SAMPLERATE=11025;
+								break;
+							case 3:
+								AudioFragment.RECORDER_SAMPLERATE=16000;
+								break;
+							case 4:
+								AudioFragment.RECORDER_SAMPLERATE=22050;
+								break;
+						}
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> parent) {
+						//This method is being invoked when we select nothing from the spinner.
+					}
+				});
 		
 		//Set a listener for our data switch to control whether we show data or not.
 		mDataSwitch.setOnCheckedChangeListener(new OnCheckedChangeListener() {

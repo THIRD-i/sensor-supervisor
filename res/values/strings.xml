@@ -15,6 +15,13 @@
     <string name="sensor_list_rate">Rate: </string>
     <string name="unknown_value">N/A</string>
     <string name="camera_switch_text">Show camera</string>
+    <string name="audio_samplerate_text">Microphone sample rate?</string>
+    <string-array name="audio_array">
+        <item>8000  Hz</item>
+        <item>11025 Hz</item>
+        <item>16000 Hz</item>
+        <item>22050 Hz</item>
+    </string-array>
     
     <string-array name="data_array">
         <item>Database</item>
