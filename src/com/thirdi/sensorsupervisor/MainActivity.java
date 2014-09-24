@@ -35,6 +35,7 @@ public class MainActivity extends Activity
     private NetworkFragment mNetworkFragment;
     private MediaFragment mMediaFragment;
     private FragmentTransaction mFragmentTransaction;
+    private DatabaseFragment mDatabaseFragment;
     private SettingsFragment mSettingsFragment;
     
     @Override
@@ -52,6 +53,7 @@ public class MainActivity extends Activity
         mNetworkFragment = new NetworkFragment();
         mMediaFragment = new MediaFragment();
         mSettingsFragment = new SettingsFragment();
+        mDatabaseFragment = new DatabaseFragment();
         
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -97,6 +99,12 @@ public class MainActivity extends Activity
             	mFragmentTransaction.commit();
             	break;
             case 5:
+            	mTitle = getString(R.string.title_section5);
+            	mFragmentTransaction = mFragmentManager.beginTransaction();
+            	mFragmentTransaction.replace(R.id.container, mDatabaseFragment);
+            	mFragmentTransaction.commit();
+            	break;
+            case 6:
             	mTitle = getString(R.string.action_settings);
             	mFragmentTransaction = mFragmentManager.beginTransaction();
             	mFragmentTransaction.replace(R.id.container, mSettingsFragment);
