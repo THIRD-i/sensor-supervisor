@@ -17,7 +17,7 @@ public class DatabaseFragment extends Fragment {
 	
     public DatabaseFragment() {
         // Required empty public constructor
-    	mDbHelper = new DBHelper(getActivity().getBaseContext());
+    	
     }
 
     @Override
@@ -36,6 +36,7 @@ public class DatabaseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        mDbHelper = new DBHelper(getActivity().getBaseContext());
         mDatabase = mDbHelper.getReadableDatabase();
         String[] projection = {
         	DBContract.DBEntry.COLUMN_NAME_SENSOR_ID,

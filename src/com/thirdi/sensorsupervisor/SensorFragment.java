@@ -1,5 +1,6 @@
 package com.thirdi.sensorsupervisor;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
 import android.app.Fragment;
@@ -434,6 +435,27 @@ public class SensorFragment extends Fragment {
 					.show();
 			return false;
 		}
+	}
+	protected void FileWrite(String name, String X,String Y,String Z,String id){
+		String filename = "Sensors";
+		
+        String string = "Sensors "+ name +"X :" + X + " Y :" + Y + " Z :" + Z +"ID" + id ;
+        FileOutputStream outputStream;
+
+        try {
+          outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+          outputStream.write(string.getBytes());
+          outputStream.close();
+          System.out.println("file yazdirildi");
+        
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+	}
+
+	private FileOutputStream openFileOutput(String filename, int modePrivate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
