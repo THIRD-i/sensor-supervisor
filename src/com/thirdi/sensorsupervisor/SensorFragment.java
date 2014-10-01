@@ -47,6 +47,7 @@ public class SensorFragment extends Fragment {
 	private SensorManager mSensorManager;
 	private LinearLayout mSensorContainer;
 	private DBHelper mDBHelper;
+	private FileHelper mFileHelper;
 
 	/**
 	 * A holder class that holds view elements, sensor and listener. Will be set
@@ -91,6 +92,7 @@ public class SensorFragment extends Fragment {
 		mSensorManager = (SensorManager) getActivity().getSystemService(
 				Context.SENSOR_SERVICE);
 		mDBHelper = new DBHelper(getActivity().getBaseContext());
+		mFileHelper = new FileHelper(getActivity().getApplicationContext());
 	}
 
 	@Override
@@ -234,6 +236,8 @@ public class SensorFragment extends Fragment {
 								}).start();
 							} else if (SAVE_LOCATION == "File") {
 								// TODO: ADD FILE SAVE OPTION.
+								//mFileHelper.FileWrite(holder.sensor.getType(), holder.sensor.getName(), sensorEvent.values[0],
+								//		sensorEvent.values[1], sensorEvent.values[2]);
 							}
 						}
 
@@ -435,27 +439,6 @@ public class SensorFragment extends Fragment {
 					.show();
 			return false;
 		}
-	}
-	protected void FileWrite(String name, String X,String Y,String Z,String id){
-		String filename = "Sensors";
-		
-        String string = "Sensors "+ name +"X :" + X + " Y :" + Y + " Z :" + Z +"ID" + id ;
-        FileOutputStream outputStream;
-
-        try {
-          outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-          outputStream.write(string.getBytes());
-          outputStream.close();
-          System.out.println("file yazdirildi");
-        
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-	}
-
-	private FileOutputStream openFileOutput(String filename, int modePrivate) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

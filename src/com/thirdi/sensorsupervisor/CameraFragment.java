@@ -12,6 +12,7 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.PictureCallback;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,9 +25,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 //TODO: Clean, comment, add a way to control FPS and create videos.
 public class CameraFragment extends Fragment {
+	public static int RECORDER_FPS = 24; 
 	private Camera mCamera;
     private CameraPreview mCameraPreview;
     private Button mPictureButton, mVideoButton;
+    private MediaRecorder recorder;
     private final static String TAG = "Camera";
     private PictureCallback mPicture = new PictureCallback() {
 
@@ -93,6 +96,31 @@ public class CameraFragment extends Fragment {
 					}
 				});
 				mCamera.takePicture(null, null, mPicture);
+			}
+		});
+        
+        mVideoButton.setOnClickListener(new OnClickListener() {
+			
+        	boolean is_recording = false;
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (!is_recording) {
+					mVideoButton.setText("RECORDING");
+					recorder = new MediaRecorder();
+					recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+					recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+					recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+					recorder.setOutputFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath());
+					recorder.setVideoFrameRate(RECORDER_FPS);
+					recorder.start();
+					is_recording = true;
+				} else {
+					recorder.stop();
+					recorder.reset();
+					recorder.release();
+					mVideoButton.setText("Video");
+				}
 			}
 		});
     }
