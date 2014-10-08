@@ -92,7 +92,7 @@ public class SensorFragment extends Fragment {
 		mSensorManager = (SensorManager) getActivity().getSystemService(
 				Context.SENSOR_SERVICE);
 		mDBHelper = new DBHelper(getActivity().getBaseContext());
-		mFileHelper = new FileHelper(getActivity().getApplicationContext());
+		mFileHelper = new FileHelper();
 	}
 
 	@Override
@@ -238,6 +238,9 @@ public class SensorFragment extends Fragment {
 								// TODO: ADD FILE SAVE OPTION.
 								//mFileHelper.FileWrite(holder.sensor.getType(), holder.sensor.getName(), sensorEvent.values[0],
 								//		sensorEvent.values[1], sensorEvent.values[2]);
+								String line = holder.sensor.getType() + " " + holder.sensor.getName() + " " +
+										sensorEvent.values[0] + " " + sensorEvent.values[1] + " " + sensorEvent.values[2] + "\n";
+								Toast.makeText(getActivity().getApplicationContext(), mFileHelper.write("sensordata", line) + "", Toast.LENGTH_SHORT).show();
 							}
 						}
 
