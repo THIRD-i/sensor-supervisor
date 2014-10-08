@@ -26,6 +26,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/video_fps_text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textViewFPS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <SeekBar
+        android:id="@+id/videoFPSBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30" />
+
     <Switch
         android:id="@+id/data_switch"
         android:layout_width="match_parent"

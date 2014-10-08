@@ -12,6 +12,7 @@ import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.PictureCallback;
+import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class CameraFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mCamera = getCameraInstance();
+        mCamera.setDisplayOrientation(90);
         mCameraPreview = new CameraPreview(getActivity(), mCamera);
     }
 
@@ -107,19 +109,43 @@ public class CameraFragment extends Fragment {
 				// TODO Auto-generated method stub
 				if (!is_recording) {
 					mVideoButton.setText("RECORDING");
+					try {
+						mCamera.setPreviewDisplay(null);
+					} catch (java.io.IOException ioe) {
+						Log.d(TAG, "IOException nullifying preview display: " + ioe.getMessage());
+					}
+					mCamera.stopPreview();
+					mCamera.unlock();
 					recorder = new MediaRecorder();
+					recorder.setCamera(mCamera);
 					recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+					recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 					recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-					recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-					recorder.setOutputFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath());
+					recorder.setVideoSize(640, 480);
+					//recorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH));
 					recorder.setVideoFrameRate(RECORDER_FPS);
-					recorder.start();
-					is_recording = true;
+					recorder.setOrientationHint(90);
+					recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+					recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
+					recorder.setPreviewDisplay(mCameraPreview.getSurface());
+					recorder.setOutputFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES).getAbsolutePath() + "/" + System.currentTimeMillis() + ".mp4");
+					try {
+						recorder.prepare();
+						recorder.start();
+						is_recording = true;
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else {
-					recorder.stop();
+					//recorder.stop();
 					recorder.reset();
 					recorder.release();
 					mVideoButton.setText("Video");
+					is_recording = false;
 				}
 			}
 		});
