@@ -48,7 +48,7 @@ public class DatabaseFragment extends Fragment {
         	DBContract.DBEntry.COLUMN_NAME_VALUE_Y,
         	DBContract.DBEntry.COLUMN_NAME_VALUE_Z,
         };
-        String sortOrder = DBContract.DBEntry.COLUMN_NAME_SENSOR_NAME;
+        String sortOrder = DBContract.DBEntry._ID;
         Cursor cursor = mDatabase.query(
         		DBContract.DBEntry.TABLE_NAME,
         		projection,

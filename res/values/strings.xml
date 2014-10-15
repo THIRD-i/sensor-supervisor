@@ -5,8 +5,9 @@
     <string name="title_section1">Basic Sensors</string>
     <string name="title_section2">GPS</string>
     <string name="title_section3">Network</string>
-    <string name="title_section4">Media</string>
-    <string name="title_section5">Database</string>
+    <string name="title_section4">Camera</string>
+    <string name="title_section5">Audio</string>
+    <string name="title_section6">Database</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>

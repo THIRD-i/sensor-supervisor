@@ -14,6 +14,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SettingsFragment extends Fragment {
 	/**
@@ -89,11 +90,12 @@ public class SettingsFragment extends Fragment {
 
 						// Depending on the item, set the save location
 						// accordingly.
+	
 						switch (position) {
-						case 1:
+						case 0:
 							SensorFragment.SAVE_LOCATION = "Database";
 							break;
-						case 2:
+						case 1:
 							SensorFragment.SAVE_LOCATION = "File";
 							break;
 						}
@@ -118,16 +120,16 @@ public class SettingsFragment extends Fragment {
 						// Depending on the item, set audio recording sample
 						// rate accordingly.
 						switch (position) {
-						case 1:
+						case 0:
 							AudioFragment.RECORDER_SAMPLERATE = 8000;
 							break;
-						case 2:
+						case 1:
 							AudioFragment.RECORDER_SAMPLERATE = 11025;
 							break;
-						case 3:
+						case 2:
 							AudioFragment.RECORDER_SAMPLERATE = 16000;
 							break;
-						case 4:
+						case 3:
 							AudioFragment.RECORDER_SAMPLERATE = 22050;
 							break;
 						}

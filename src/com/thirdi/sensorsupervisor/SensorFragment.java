@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SensorFragment extends Fragment {
-
+  // TODO: setting kayit file....  
 	/**
 	 * Shows a list of available sensors and data retrieved from them. Also
 	 * allows you to control them.
@@ -204,7 +204,7 @@ public class SensorFragment extends Fragment {
 							}
 							// Save data according to the value of
 							// SAVE_LOCATION.
-							if (SAVE_LOCATION == "Database") {
+							if (SAVE_LOCATION.equals("Database")) {
 								new Thread(new Runnable() {
 									@Override
 									public void run() {
@@ -234,13 +234,13 @@ public class SensorFragment extends Fragment {
 												null, values);
 									}
 								}).start();
-							} else if (SAVE_LOCATION == "File") {
+							} else if (SAVE_LOCATION.equals("File")) {
 								// TODO: ADD FILE SAVE OPTION.
 								//mFileHelper.FileWrite(holder.sensor.getType(), holder.sensor.getName(), sensorEvent.values[0],
 								//		sensorEvent.values[1], sensorEvent.values[2]);
 								String line = holder.sensor.getType() + " " + holder.sensor.getName() + " " +
 										sensorEvent.values[0] + " " + sensorEvent.values[1] + " " + sensorEvent.values[2] + "\n";
-								Toast.makeText(getActivity().getApplicationContext(), mFileHelper.write("sensordata", line) + "", Toast.LENGTH_SHORT).show();
+								//Toast.makeText(getActivity().getApplicationContext(), mFileHelper.write("sensordata", line) + "", Toast.LENGTH_SHORT).show();
 							}
 						}
 
