@@ -75,6 +75,7 @@ public class MainActivity extends Activity
     public void onSectionAttached(int number) {
     	// An element from NavigationDrawer is selected, replace the old fragment with the new one.
         // Basically, start a fragment transaction, define it, then commit it.
+    	// Camera and Audio Fragment Changed
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
