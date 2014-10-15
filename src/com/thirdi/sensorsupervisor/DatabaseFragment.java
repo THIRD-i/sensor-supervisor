@@ -1,5 +1,7 @@
 package com.thirdi.sensorsupervisor;
 
+import com.thirdi.sensorsupervisor.DBContract.DBEntry;
+
 import android.app.Fragment;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,7 +41,8 @@ public class DatabaseFragment extends Fragment {
         mDbHelper = new DBHelper(getActivity().getBaseContext());
         mDatabase = mDbHelper.getReadableDatabase();
         String[] projection = {
-        	DBContract.DBEntry.COLUMN_NAME_SENSOR_ID,
+        	DBContract.DBEntry._ID,
+        	//DBContract.DBEntry.COLUMN_NAME_SENSOR_ID,
         	DBContract.DBEntry.COLUMN_NAME_SENSOR_NAME,
         	DBContract.DBEntry.COLUMN_NAME_VALUE_X,
         	DBContract.DBEntry.COLUMN_NAME_VALUE_Y,
@@ -55,11 +58,15 @@ public class DatabaseFragment extends Fragment {
         		null,
         		sortOrder);
         int[] views = {
-        		R.id.bssidView,
+        		R.id._id,
+        		R.id.sensor_name,
+        		R.id.data_x,
+        		R.id.data_y,
+        		R.id.data_z,
         };
         ListView mListView = (ListView) getView().findViewById(R.id.listview);
         SimpleCursorAdapter mAdapter = new SimpleCursorAdapter(getActivity().getApplicationContext(),
-        		R.layout.wifi_list_item, cursor, projection, views, 0);
+        		R.layout.db_list_item, cursor, projection, views, 0);
         mListView.setAdapter(mAdapter);
     }
 }

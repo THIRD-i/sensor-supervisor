@@ -8,7 +8,7 @@ public final class DBContract {
 	private static final String COMMA_SEP = ",";
 	protected static final String SQL_CREATE_ENTRIES = 
 		"CREATE TABLE " + DBEntry.TABLE_NAME + " (" +
-			DBEntry._ID + "INTEGER PRIMARY KEY," +
+			DBEntry._ID + " INTEGER PRIMARY KEY" + COMMA_SEP +
 			DBEntry.COLUMN_NAME_SENSOR_ID + TEXT_TYPE + COMMA_SEP +
 			DBEntry.COLUMN_NAME_SENSOR_NAME + TEXT_TYPE + COMMA_SEP +
 			DBEntry.COLUMN_NAME_VALUE_X + REAL_TYPE + COMMA_SEP +
