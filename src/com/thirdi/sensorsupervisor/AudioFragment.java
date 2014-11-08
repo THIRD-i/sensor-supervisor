@@ -143,7 +143,15 @@ protected static int RECORDER_SAMPLERATE = 8000 ;
     //start and stop button listener
     private View.OnClickListener btnClick = new View.OnClickListener() {
         public void onClick(View v) {
-            switch (v.getId()) {
+        	int id = v.getId();
+        	if (id == R.id.btnStart) {
+        		enableButtons(true);
+                startRecording();
+        	} else if (id == R.id.btnStop) {
+        		 enableButtons(false);
+                 stopRecording();
+        	}
+            /*switch (v.getId()) {
                 case R.id.btnStart: {
                     enableButtons(true);
                     startRecording();
@@ -154,7 +162,7 @@ protected static int RECORDER_SAMPLERATE = 8000 ;
                     stopRecording();
                     break;
                 }
-            }
+            }*/
         }
     };
 }

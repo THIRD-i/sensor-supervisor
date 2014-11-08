@@ -29,6 +29,7 @@ public class GPSFragment extends Fragment implements LocationListener {
 	private LocationManager mLocationManager;
 	private String mProvider;
 	private Button mLocationButton;
+	private Button mMaps;
 	
 	public GPSFragment() {
 		//Required empty public constructor.
@@ -55,8 +56,18 @@ public class GPSFragment extends Fragment implements LocationListener {
 		mLongitudeView = (TextView) getView().findViewById(R.id.longitude);
 		mAccuracyView = (TextView) getView().findViewById(R.id.accuracy);
 		mLocationButton = (Button) getView().findViewById(R.id.locationButton);
-		mLocationManager = (LocationManager) getActivity().getBaseContext()
+		mMaps=(Button) getView().findViewById(R.id.btnmap);
+				mLocationManager = (LocationManager) getActivity().getBaseContext()
 				.getSystemService(Context.LOCATION_SERVICE);
+	    mMaps.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent myIntent = new Intent(getView().getContext(), maps.class);
+				startActivity(myIntent);
+				
+			}
+		});
 		//Set a click listener to our location button.
 		mLocationButton.setOnClickListener(new View.OnClickListener() {
 			
