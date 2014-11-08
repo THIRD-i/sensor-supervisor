@@ -425,14 +425,13 @@ containing a value of this type.
         public static int TextView02=0x7f07001d;
         public static int _id=0x7f070018;
         public static int accuracy=0x7f07002c;
-        public static int action_example=0x7f070052;
         public static int action_settings=0x7f070051;
         public static int audio_spinner=0x7f070039;
         public static int book_now=0x7f070010;
         public static int bssidView=0x7f07004c;
+        public static int btnMap=0x7f07002e;
         public static int btnStart=0x7f070021;
         public static int btnStop=0x7f070022;
-        public static int btnmap=0x7f07002e;
         public static int button=0x7f070030;
         public static int button2=0x7f070032;
         public static int buyButton=0x7f07000a;
@@ -531,11 +530,10 @@ containing a value of this type.
     }
     public static final class string {
         public static int accept=0x7f050002;
-        public static int action_example=0x7f05002c;
-        public static int action_settings=0x7f05002d;
+        public static int action_settings=0x7f05002c;
         public static int app_name=0x7f050023;
-        public static int audio_samplerate_text=0x7f050033;
-        public static int camera_switch_text=0x7f050032;
+        public static int audio_samplerate_text=0x7f050032;
+        public static int camera_switch_text=0x7f050031;
         /**   Text for notification shown when the Android Wear apps needs to be updated. Only shown on the wearable. [CHAR LIMIT=NONE] 
          */
         public static int common_android_wear_notification_needs_update_text=0x7f050009;
@@ -637,12 +635,12 @@ containing a value of this type.
         public static int common_signin_button_text_long=0x7f050020;
         public static int create_calendar_message=0x7f050005;
         public static int create_calendar_title=0x7f050004;
-        public static int data_spinner_text=0x7f05002e;
-        public static int data_switch_text=0x7f05002f;
+        public static int data_spinner_text=0x7f05002d;
+        public static int data_switch_text=0x7f05002e;
         public static int decline=0x7f050003;
         public static int navigation_drawer_close=0x7f05002b;
         public static int navigation_drawer_open=0x7f05002a;
-        public static int sensor_list_rate=0x7f050030;
+        public static int sensor_list_rate=0x7f05002f;
         public static int store_picture_message=0x7f050001;
         public static int store_picture_title=0x7f050000;
         public static int title_section1=0x7f050024;
@@ -651,8 +649,8 @@ containing a value of this type.
         public static int title_section4=0x7f050027;
         public static int title_section5=0x7f050028;
         public static int title_section6=0x7f050029;
-        public static int unknown_value=0x7f050031;
-        public static int video_fps_text=0x7f050034;
+        public static int unknown_value=0x7f050030;
+        public static int video_fps_text=0x7f050033;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
