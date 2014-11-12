@@ -28,7 +28,7 @@ public class GPSFragment extends Fragment implements LocationListener {
 	private TextView mLatitudeView, mLongitudeView, mAccuracyView;
 	private LocationManager mLocationManager;
 	private String mProvider;
-	private Button mLocationButton;
+	private Button mLocationButton, mLocationStopButton;
 	private Button mMaps;
 
 	public GPSFragment() {
@@ -59,8 +59,11 @@ public class GPSFragment extends Fragment implements LocationListener {
 		mMaps = (Button) getView().findViewById(R.id.btnMap);
 		mLocationManager = (LocationManager) getActivity().getBaseContext()
 				.getSystemService(Context.LOCATION_SERVICE);
+		mLocationStopButton = (Button) getView().findViewById(R.id.locationStopButton);
+		
+		mLocationStopButton.setClickable(false);
+		
 		// Set a click listener to our location button.
-
 		mMaps.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -76,9 +79,20 @@ public class GPSFragment extends Fragment implements LocationListener {
 			@Override
 			public void onClick(View v) {
 				// This method is being invoked whenever you click the button.
-
 				registerGPS();
-
+				mLocationStopButton.setClickable(true);
+				mLocationButton.setClickable(false);
+			}
+		});
+		
+		mLocationStopButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//Removes status listener.
+				mLocationManager.removeUpdates(GPSFragment.this);
+				mLocationStopButton.setClickable(false);
+				mLocationButton.setClickable(true);
 			}
 		});
 	}
@@ -92,7 +106,11 @@ public class GPSFragment extends Fragment implements LocationListener {
 		if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			// Provider is present, continue registering. Use default criteria
 			// to select provider.
-			mProvider = mLocationManager.getBestProvider(new Criteria(), false);
+			mProvider = LocationManager.GPS_PROVIDER;
+			
+			//Never-ending location updates, yay.
+			mLocationManager.requestLocationUpdates(mProvider, 0, 0, this);
+			
 			// Get last known location from said provider.
 			location = mLocationManager.getLastKnownLocation(mProvider);
 
